@@ -29,9 +29,20 @@
                                 <div class="blog-item">
                                     <div class="blog-img">
                                         <a href="@item.Url()">
-                                                <img src="https://placehold.co/600x400" alt="placeholder">
+                                            @{
+                                                var image = item.Value<IPublishedContent>("image");
+                                            }
+                                            @if (image != null)
+                                            {
+                                                <img src="@image.Url()" alt="">
+                                            }
+                                            else
+                                            {
+                                                <img src="https://via.placeholder.com/400x250" alt="">
+                                            }
                                         </a>
                                     </div>
+                                    
                                     <div class="blog-text">
                                         <div class="blog-tag">
                                             <h6><small>@String.Join(" | ", item.Value<IEnumerable<string>>("categories") ?? new List<string>())</small></h6>
