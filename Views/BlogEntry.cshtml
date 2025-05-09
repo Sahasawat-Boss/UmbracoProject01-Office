@@ -2,14 +2,9 @@
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.BlogEntry>
 @using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
 @{
-	Layout = "layout.cshtml";
+	Layout = "childPage.cshtml";
 	string cssCurrent = "nav-current";
 }
-<div class="jumbotron jumbotron-small jumbotron-single d-flex align-items-center">
-  <div class="container text-center">
-    <h1 class="display-2 mb-4">@Model.Name</h1>
-  </div>
-</div>
 
 <section id="single-content" class="bg-white">
     <div class="container">
@@ -19,6 +14,10 @@
                 <div class="col-md-8 offset-md-2 mt-4">
                     @Model.Summary
                     <hr />
+                     @if(Model.Image!= null){
+                        var mediaCrop = Url.GetCropUrl(Model.Image, "BlogHeader");
+                            <img src="@mediaCrop" alt="@Model.Image.Name">
+                    }
                     @Model.BodyText
                 </div>
                 <div class="col-md-2 mt-4 align-self-start">
@@ -39,18 +38,6 @@
                             </li>
                         }
                     </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="bg-fixed overlay">
-    <div class="container">
-        <div class="section-content">
-            <div class="row">
-                <div class="col-md-12 text-center">
-                    <h2 class="mb-2"></h2>
                 </div>
             </div>
         </div>

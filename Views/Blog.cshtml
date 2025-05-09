@@ -2,14 +2,10 @@
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
 @using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
 @{
-    Layout = "layout.cshtml";
+    Layout = "childPage.cshtml";
     var blogs = Model.Children().OrderByDescending(x => x.CreateDate);
 }
-<div class="jumbotron jumbotron-small jumbotron-single d-flex align-items-center">
-  <div class="container text-center">
-    <h1 class="display-2 mb-4">@Model.Name</h1>
-  </div>
-</div>
+
 <section id="blog" class="bg-grey">
     <div class="container">
         <div class="section-content">
@@ -28,10 +24,10 @@
                             <div class="col-md-4 blog-item-wrapper">
                                 <div class="blog-item">
                                     <div class="blog-img">
-                                        <a href="@item.Url()">
-                                                <img src="https://placehold.co/600x400" alt="placeholder">
-                                        </a>
-                                    </div>
+                                     @if(item.Image != null){                         var mediaCrop = Url.GetCropUrl(item.Image, "BlogThumbnail");                             <img src="@mediaCrop" alt="">                         }                         else{                             <img src="https://via.placeholder.com/400x250" alt="">                         }                 
+            </div>
+
+                                    
                                     <div class="blog-text">
                                         <div class="blog-tag">
                                             <h6><small>@String.Join(" | ", item.Value<IEnumerable<string>>("categories") ?? new List<string>())</small></h6>
@@ -65,18 +61,6 @@
                 </div>
                 <!-- End of Blog -->
                 
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="bg-fixed overlay">
-    <div class="container">
-        <div class="section-content">
-            <div class="row">
-                <div class="col-md-12 text-center">
-                    <h2 class="mb-2"></h2>
-                </div>
             </div>
         </div>
     </div>
