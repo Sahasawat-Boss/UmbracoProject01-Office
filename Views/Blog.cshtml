@@ -24,9 +24,21 @@
                             <div class="col-md-4 blog-item-wrapper">
                                 <div class="blog-item">
                                     <div class="blog-img">
-                                     @if(item.Image != null){                         var mediaCrop = Url.GetCropUrl(item.Image, "BlogThumbnail");                             <img src="@mediaCrop" alt="">                         }                         else{                             <img src="https://via.placeholder.com/400x250" alt="">                         }                 
-            </div>
-
+                                        <a href="@item.Url()">
+                                            @{
+                                                var image = item.Value<IPublishedContent>("image");
+                                            }
+                                            @if (image != null)
+                                            {
+                                                var mediaCrop = Url.GetCropUrl(image, "BlogThumbnail");
+                                                <img src="@mediaCrop" alt="">
+                                            }
+                                            else
+                                            {
+                                                <img src="https://via.placeholder.com/400x250" alt="">
+                                            }
+                                        </a>
+                                    </div>
                                     
                                     <div class="blog-text">
                                         <div class="blog-tag">
