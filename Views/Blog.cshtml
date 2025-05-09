@@ -34,7 +34,8 @@
                                             }
                                             @if (image != null)
                                             {
-                                                <img src="@image.Url()" alt="">
+                                                var mediaCrop = Url.GetCropUrl(image, "BlogThumbnail");
+                                                <img src="@mediaCrop" alt="">
                                             }
                                             else
                                             {
